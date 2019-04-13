@@ -1,0 +1,75 @@
+body {
+	background: #eee !important;	
+}
+
+.wrapper {	
+	margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.form-signin-heading {
+    color: blue;
+    margin-left: 27%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    margin-left: 20%;
+}
+
+.loginButton {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 20%;
+}
+
+.resetButton {
+    background-color: gray;
+    border: none;
+    color: black;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 10%;
+}
+
+input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+margin-bottom: 20px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+
+.errorMessage {
+    color: red;
+    margin-left: 20%;
+}

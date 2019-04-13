@@ -1,0 +1,7 @@
+<app-header></app-header>
+<app-nav-bar></app-nav-bar>
+<div class = "row message">
+  <div class = "col-sm-4" *ngIf = "displayView">{{displayViewMessage}}</div>
+  <div class = "col-sm-4" *ngIf = "editView">{{editViewMessage}}</div>
+  <div class = "col-sm-4" *ngIf = "createView">{{createViewMessage}}</div>
+</div>

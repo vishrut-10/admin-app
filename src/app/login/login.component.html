@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <form class="form-signin">       
+    <h4 class="form-signin-heading">{{title}}</h4>
+    <p *ngIf = "isInvalidCredentials" class = "errorMessage">{{errorMessage}}</p>
+    <input type="text" class="form-control" name="username" placeholder="User Name" required="" autofocus="" [(ngModel)] = "userName"/> <br /> <br />
+    <input type="password" class="form-control" name="password" placeholder="Password" required="" [(ngModel)] = "password"/> <br /> <br />
+    <button class="loginButton" (click)="login()">Login</button>
+    <button class="resetButton" (click)="reset()">Reset</button>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<app-header></app-header>
+<app-nav-bar></app-nav-bar>
+
+<select (change) = "get($event.target)">
+  <option *ngFor = "let category of categories" [value]="category">{{category}}</option>
+</select>
+
+<input placeholder="Search Student" (input) = "filterStudentsByName($event.target.value)"/>
+
+<div *ngFor = "let student of filteredStudents">
+  <div [ngClass] = "{'blue': student.category === 'International', 'yellow': student.category === 'Domestic'}">
+    {{student.name}}
+    <button>Edit</button>
+    <button>View</button>
+    <button>Delete</button>
+  </div>
+</div>
