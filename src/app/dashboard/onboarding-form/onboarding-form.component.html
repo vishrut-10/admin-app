@@ -1,7 +1,39 @@
 <app-header></app-header>
 <app-nav-bar></app-nav-bar>
+
 <div class = "row message">
   <div class = "col-sm-4" *ngIf = "displayView">{{displayViewMessage}}</div>
   <div class = "col-sm-4" *ngIf = "editView">{{editViewMessage}}</div>
   <div class = "col-sm-4" *ngIf = "createView">{{createViewMessage}}</div>
 </div>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <label>Student Name</label>
+  <input name="name" placeholder="Name" ngModel /> <br/>
+
+  <label>Category</label>
+  <select name = "category" ngModel>
+    <option value="">Category</option>
+    <option value = "Domestic">Domestic</option>
+    <option value = "International">International</option>
+  </select><br/>
+
+  <label>Documents</label>
+  <div *ngFor = "let item of documents">
+    {{item}}
+    <input type = "checkbox" [name] = "item" ngModel/>
+  </div><br/>
+
+  <label>DOB</label>
+  <input type = "date" name = "dob" ngModel /><br/>
+
+  <label>Father's Name</label>
+  <input name="father_name" placeholder="Father's Name" ngModel /> <br/>
+
+  <label>Mother's Name</label>
+  <input name="mother_name" placeholder="Mother's Name" ngModel /> <br/>
+
+  <label>Last Class Score</label>
+  <input name="score" placeholder="%(marks)" ngModel /> <br/>
+  <button>Onboard</button>
+</form>

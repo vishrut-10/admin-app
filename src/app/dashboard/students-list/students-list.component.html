@@ -7,11 +7,11 @@
 
 <input placeholder="Search Student" (input) = "filterStudentsByName($event.target.value)"/>
 
-<div *ngFor = "let student of filteredStudents">
+<div *ngFor = "let student of filteredStudents; let i = index">
   <div [ngClass] = "{'blue': student.category === 'International', 'yellow': student.category === 'Domestic'}">
     {{student.name}}
     <button>Edit</button>
     <button>View</button>
-    <button>Delete</button>
+    <button (click) = "deleteStudent(i)">Delete</button>
   </div>
 </div>

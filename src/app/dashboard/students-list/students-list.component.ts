@@ -8,11 +8,9 @@ import { UtilService, Student } from 'src/services/util.service';
 })
 export class StudentsListComponent implements OnInit {
 
-  constructor(public utilService : UtilService) { 
-    this.utilService.getStudentDetails().subscribe(data => {
-      this.allStudents = data;
-      this.filteredStudents = data;
-    });
+  constructor(public utilService : UtilService) {
+    this.allStudents = this.utilService.students$.getValue();
+    this.filteredStudents = this.allStudents;
   }
 
   ngOnInit() {
@@ -42,7 +40,7 @@ export class StudentsListComponent implements OnInit {
   }
 
   filterStudentsByName(value) {
-    this.searchedStudent = value;
+    this.searchedStudent = value.toLowerCase();
 
     if (this.selectedCategory === "Domestic") {
       this.filteredStudents = this.domesticStudents.filter(x => x.name.toLowerCase().includes(this.searchedStudent));
@@ -63,4 +61,7 @@ export class StudentsListComponent implements OnInit {
     }
   }
 
+  deleteStudent(i) {
+    this.utilService.students$.getValue().splice(i, 1);
+  }
 }
