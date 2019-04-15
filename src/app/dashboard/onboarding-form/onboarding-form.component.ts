@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
-import { UtilService, Student } from 'src/services/util.service';
+import { UtilService, Student, Action } from 'src/services/util.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,7 +10,19 @@ import {Router} from '@angular/router';
 })
 export class OnboardingFormComponent implements OnInit {
 
-  constructor(public utilService : UtilService, public router: Router) { }
+  constructor(public utilService : UtilService, public router: Router) {
+    if (this.utilService.enabledView === Action.Edit) {
+      this.editView = true;
+      this.createView = false;
+      this.displayView = false;
+      this.populateStudentView();
+    } else if (this.utilService.enabledView === Action.View) {
+      this.editView = false;
+      this.createView = false;
+      this.displayView = true;
+      this.populateStudentView();
+    }
+   }
 
   ngOnInit() {
   }
@@ -23,6 +35,13 @@ export class OnboardingFormComponent implements OnInit {
   editViewMessage = "On Boarding Form (Edit)";
   documents = ["Domicile", "Birth certificate", "Marksheets", "Police clearance", "Passport", "Declaration"];
   student : Student;
+  
+  stud_name : string;
+  stud_dob : Date;
+  stud_father : string;
+  stud_mother : string;
+  stud_score : string;
+  stud_category : string;
 
   onSubmit(f: NgForm) {
     console.log(f.value);
@@ -40,5 +59,19 @@ export class OnboardingFormComponent implements OnInit {
     this.utilService.addNewStudent(this.student);
     this.utilService.selectedItem = "List Students";
     this.router.navigate(['/list']);
+  }
+
+  onEdit(f: NgForm) {
+    console.log(f.value);
+  }
+
+  populateStudentView() {
+    this.student = this.utilService.students$.getValue()[this.utilService.selectedStudent];
+    this.stud_name = this.student.name;
+    this.stud_category = this.student.category;
+    this.stud_dob = this.student.dob;
+    this.stud_father = this.student.father;
+    this.stud_mother = this.student.mother;
+    this.stud_score = this.student.last_class_score;
   }
 }

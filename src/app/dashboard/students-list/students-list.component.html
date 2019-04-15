@@ -10,8 +10,8 @@
 <div *ngFor = "let student of filteredStudents; let i = index">
   <div [ngClass] = "{'blue': student.category === 'International', 'yellow': student.category === 'Domestic'}">
     {{student.name}}
-    <button>Edit</button>
-    <button>View</button>
+    <button (click) = "editStudent(i)">Edit</button>
+    <button (click) = "viewStudent(i)">View</button>
     <button (click) = "deleteStudent(i)">Delete</button>
   </div>
 </div>

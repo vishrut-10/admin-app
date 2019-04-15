@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilService, Student } from 'src/services/util.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-students-list',
@@ -8,7 +9,7 @@ import { UtilService, Student } from 'src/services/util.service';
 })
 export class StudentsListComponent implements OnInit {
 
-  constructor(public utilService : UtilService) {
+  constructor(public utilService : UtilService, public router : Router) {
     this.allStudents = this.utilService.students$.getValue();
     this.filteredStudents = this.allStudents;
   }
@@ -63,5 +64,17 @@ export class StudentsListComponent implements OnInit {
 
   deleteStudent(i) {
     this.utilService.students$.getValue().splice(i, 1);
+  }
+
+  editStudent(i) {
+    this.utilService.editStudentUtil(i);
+    this.utilService.selectedItem = "On Boarding Form";
+    this.router.navigate(['/form']);
+  }
+
+  viewStudent(i) {
+    this.utilService.displayStudent(i);
+    this.utilService.selectedItem = "On Boarding Form";
+    this.router.navigate(['/form']);
   }
 }

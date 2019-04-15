@@ -7,33 +7,101 @@
   <div class = "col-sm-4" *ngIf = "createView">{{createViewMessage}}</div>
 </div>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <label>Student Name</label>
-  <input name="name" placeholder="Name" ngModel /> <br/>
+<div *ngIf = "createView">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <label>Student Name</label>
+      <input name="name" placeholder="Name" ngModel /> <br/>
+    
+      <label>Category</label>
+      <select name = "category" ngModel>
+        <option value="">Category</option>
+        <option value = "Domestic">Domestic</option>
+        <option value = "International">International</option>
+      </select><br/>
+    
+      <label>Documents</label>
+      <div *ngFor = "let item of documents">
+        {{item}}
+        <input type = "checkbox" [name] = "item" ngModel/>
+      </div><br/>
+    
+      <label>DOB</label>
+      <input type = "date" name = "dob" ngModel /><br/>
+    
+      <label>Father's Name</label>
+      <input name="father_name" placeholder="Father's Name" ngModel /> <br/>
+    
+      <label>Mother's Name</label>
+      <input name="mother_name" placeholder="Mother's Name" ngModel /> <br/>
+    
+      <label>Last Class Score</label>
+      <input name="score" placeholder="%(marks)" ngModel /> <br/>
+      <button>Onboard</button>
+    </form>
+</div>
 
-  <label>Category</label>
-  <select name = "category" ngModel>
-    <option value="">Category</option>
-    <option value = "Domestic">Domestic</option>
-    <option value = "International">International</option>
-  </select><br/>
+<div *ngIf = "editView">
+  <form #f="ngForm" (ngSubmit)="onEdit(f)" novalidate>
+    <label>Student Name</label>
+    <input name="name" [(ngModel)] = "stud_name" /> <br/>
+  
+    <label>Category</label>
+    <select name = "category" [(ngModel)] = "stud_category">
+      <option value="">Category</option>
+      <option value = "Domestic">Domestic</option>
+      <option value = "International">International</option>
+    </select><br/>
+  
+    <label>Documents</label>
+    <div *ngFor = "let item of documents">
+      {{item}}
+      <input type = "checkbox" [name] = "item" ngModel/>
+    </div><br/>
+  
+    <label>DOB</label>
+    <input type = "date" name = "dob" [(ngModel)] = "stud_dob" /><br/>
+  
+    <label>Father's Name</label>
+    <input name="father_name" [(ngModel)] = "stud_father" /> <br/>
+  
+    <label>Mother's Name</label>
+    <input name="mother_name" [(ngModel)] = "stud_mother" /> <br/>
+  
+    <label>Last Class Score</label>
+    <input name="score" [(ngModel)] = "stud_score" /> <br/>
+    <button>Onboard</button>
+  </form>
+</div>
 
-  <label>Documents</label>
-  <div *ngFor = "let item of documents">
-    {{item}}
-    <input type = "checkbox" [name] = "item" ngModel/>
-  </div><br/>
-
-  <label>DOB</label>
-  <input type = "date" name = "dob" ngModel /><br/>
-
-  <label>Father's Name</label>
-  <input name="father_name" placeholder="Father's Name" ngModel /> <br/>
-
-  <label>Mother's Name</label>
-  <input name="mother_name" placeholder="Mother's Name" ngModel /> <br/>
-
-  <label>Last Class Score</label>
-  <input name="score" placeholder="%(marks)" ngModel /> <br/>
-  <button>Onboard</button>
-</form>
+<div *ngIf = "displayView">
+  <form #f="ngForm" (ngSubmit)="onEdit(f)" novalidate aria-disabled="true">
+    <label>Student Name</label>
+    <input name="name" [(ngModel)] = "stud_name" disabled/> <br/>
+  
+    <label>Category</label>
+    <select name = "category" [(ngModel)] = "stud_category" disabled>
+      <option value="">Category</option>
+      <option value = "Domestic">Domestic</option>
+      <option value = "International">International</option>
+    </select><br/>
+  
+    <label>Documents</label>
+    <div *ngFor = "let item of documents">
+      {{item}}
+      <input type = "checkbox" [name] = "item" ngModel disabled/>
+    </div><br/>
+  
+    <label>DOB</label>
+    <input type = "date" name = "dob" [(ngModel)] = "stud_dob" disabled /><br/>
+  
+    <label>Father's Name</label>
+    <input name="father_name" [(ngModel)] = "stud_father" disabled /> <br/>
+  
+    <label>Mother's Name</label>
+    <input name="mother_name" [(ngModel)] = "stud_mother" disabled /> <br/>
+  
+    <label>Last Class Score</label>
+    <input name="score" [(ngModel)] = "stud_score" disabled /> <br/>
+    <button disabled >Onboard</button>
+  </form>
+</div>
