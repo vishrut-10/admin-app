@@ -11,20 +11,24 @@ import {Router} from '@angular/router';
 export class OnboardingFormComponent implements OnInit {
 
   constructor(public utilService : UtilService, public router: Router) {
-    if (this.utilService.enabledView === Action.Edit) {
-      this.editView = true;
-      this.createView = false;
-      this.displayView = false;
-      this.populateStudentView();
-    } else if (this.utilService.enabledView === Action.View) {
-      this.editView = false;
-      this.createView = false;
-      this.displayView = true;
-      this.populateStudentView();
+    if (localStorage.getItem("admin") === "admin") {
+      if (this.utilService.enabledView === Action.Edit) {
+        this.editView = true;
+        this.createView = false;
+        this.displayView = false;
+        this.populateStudentView();
+      } else if (this.utilService.enabledView === Action.View) {
+        this.editView = false;
+        this.createView = false;
+        this.displayView = true;
+        this.populateStudentView();
+      } else {
+        this.editView = false;
+        this.createView = true;
+        this.displayView = false;
+      }
     } else {
-      this.editView = false;
-      this.createView = true;
-      this.displayView = false;
+      this.router.navigate(['/']);
     }
    }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilService, Student } from 'src/services/util.service';
+import { UtilService, Student, Action } from 'src/services/util.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,8 +10,12 @@ import { Router } from '@angular/router';
 export class StudentsListComponent implements OnInit {
 
   constructor(public utilService : UtilService, public router : Router) {
-    this.allStudents = this.utilService.students$.getValue();
-    this.filteredStudents = this.allStudents;
+    if (localStorage.getItem("admin") === "admin") {
+      this.allStudents = this.utilService.students$.getValue();
+      this.filteredStudents = this.allStudents;
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   ngOnInit() {
@@ -66,6 +70,7 @@ export class StudentsListComponent implements OnInit {
     if (confirm("Are you sure you want to delete ?") === true) {
       this.utilService.students$.getValue().splice(i, 1);
     }
+    this.utilService.enabledView = Action.Create;
   }
 
   editStudent(i) {

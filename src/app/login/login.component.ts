@@ -9,7 +9,11 @@ import { UtilService } from 'src/services/util.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public router: Router, public utilService: UtilService) { }
+  constructor(public router: Router, public utilService: UtilService) {
+    if (localStorage.length > 0) {
+      this.router.navigate(['/dashboard']);
+    }
+   }
 
   ngOnInit() {
   }
@@ -23,6 +27,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.userName === "admin" && this.password === "admin") {
       this.isInvalidCredentials = false;
+      localStorage.setItem(this.userName, this.password);
+      this.utilService.selectedItem = "On Boarding Form";
       this.router.navigate(['/dashboard']);
     } else {
       this.isInvalidCredentials = true;
