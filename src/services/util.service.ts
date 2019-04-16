@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
 
-  constructor(private http : HttpClient, private datePipe: DatePipe) { 
+  constructor(private http : HttpClient) { 
     this.fetchStudentDetails();
   }
 
@@ -39,8 +38,8 @@ export class UtilService {
     this.enabledView = Action.Edit;
   }
 
-  editStudent() {
-
+  editStudent(student : Student, i) {
+    this.students$.getValue()[i] = student;
   }
 
   displayStudent(i) {
@@ -56,6 +55,14 @@ export interface Student {
   father : string;
   mother : string;
   last_class_score : string;
+  documents : {
+    domicile : boolean,
+    birthCertificate : boolean,
+    marksheet : boolean,
+    policeClearance : boolean,
+    passport : boolean,
+    declaration : boolean
+  };
 }
 
 export enum Action {

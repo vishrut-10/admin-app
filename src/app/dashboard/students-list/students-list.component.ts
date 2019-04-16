@@ -63,7 +63,9 @@ export class StudentsListComponent implements OnInit {
   }
 
   deleteStudent(i) {
-    this.utilService.students$.getValue().splice(i, 1);
+    if (confirm("Are you sure you want to delete ?") === true) {
+      this.utilService.students$.getValue().splice(i, 1);
+    }
   }
 
   editStudent(i) {

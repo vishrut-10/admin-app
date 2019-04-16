@@ -21,6 +21,10 @@ export class OnboardingFormComponent implements OnInit {
       this.createView = false;
       this.displayView = true;
       this.populateStudentView();
+    } else {
+      this.editView = false;
+      this.createView = true;
+      this.displayView = false;
     }
    }
 
@@ -33,8 +37,11 @@ export class OnboardingFormComponent implements OnInit {
   createViewMessage = "On Boarding Form";
   displayViewMessage = "On Boarding Form (View)";
   editViewMessage = "On Boarding Form (Edit)";
-  documents = ["Domicile", "Birth certificate", "Marksheets", "Police clearance", "Passport", "Declaration"];
+  documents : string[];
+  domesticDocuments = ["Domicile*", "Birth_Certificate*", "Marksheets*", "Police_Clearance ", "Passport*", "Declaration*"];
+  internationalDocuments = ["Domicile*", "Birth_Certificate*", "Marksheets*", "Police_Clearance*", "Passport*", "Declaration*"];
   student : Student;
+  documentValues : boolean[] = [];
   
   stud_name : string;
   stud_dob : Date;
@@ -51,10 +58,20 @@ export class OnboardingFormComponent implements OnInit {
       name: formValue.name,
       category : formValue.category,
       dob : formValue.dob,
-      father : formValue.father,
-      mother : formValue.mother,
-      last_class_score : formValue.last_class_score
+      father : formValue.father_name,
+      mother : formValue.mother_name,
+      last_class_score : formValue.score,
+      documents : {
+        domicile : Boolean(formValue.Domicile),
+        marksheet : Boolean(formValue.Marksheets),
+        passport : Boolean(formValue.Passport),
+        policeClearance : Boolean(formValue.Police_Clearance),
+        declaration : Boolean(formValue.Declaration),
+        birthCertificate : Boolean(formValue.Birth_Certificate)
+      }
     }
+
+    console.log(this.student);
     
     this.utilService.addNewStudent(this.student);
     this.utilService.selectedItem = "List Students";
@@ -62,16 +79,60 @@ export class OnboardingFormComponent implements OnInit {
   }
 
   onEdit(f: NgForm) {
-    console.log(f.value);
+    let formValue = f.value;
+    
+    this.student = {
+      name: formValue.name,
+      category : formValue.category,
+      dob : formValue.dob,
+      father : formValue.father_name,
+      mother : formValue.mother_name,
+      last_class_score : formValue.last_class_score,
+      documents : {
+        domicile : Boolean(formValue.Domicile),
+        marksheet : Boolean(formValue.Marksheets),
+        passport : Boolean(formValue.Passport),
+        policeClearance : Boolean(formValue.Police_Clearance),
+        declaration : Boolean(formValue.Declaration),
+        birthCertificate : Boolean(formValue.Birth_Certificate)
+      }
+    }
+    this.utilService.editStudent(this.student, this.utilService.selectedStudent);
+    this.utilService.selectedItem = "List Students";
+    this.router.navigate(['/list']);
   }
 
   populateStudentView() {
     this.student = this.utilService.students$.getValue()[this.utilService.selectedStudent];
+    console.log(this.student);
     this.stud_name = this.student.name;
     this.stud_category = this.student.category;
     this.stud_dob = this.student.dob;
     this.stud_father = this.student.father;
     this.stud_mother = this.student.mother;
     this.stud_score = this.student.last_class_score;
+    this.documents = (this.stud_category === "Domestic") ? this.domesticDocuments : this.internationalDocuments;
+    this.documentValues.push(this.student.documents.domicile);
+    this.documentValues.push(this.student.documents.birthCertificate);
+    this.documentValues.push(this.student.documents.marksheet);
+    this.documentValues.push(this.student.documents.policeClearance);
+    this.documentValues.push(this.student.documents.passport);
+    this.documentValues.push(this.student.documents.declaration);
+    console.log(this.documentValues); 
+  }
+
+  get(category) {
+    console.log(category.value);
+    if (category.value === "Domestic") {
+      this.documents = this.domesticDocuments;
+    } else {
+      this.documents = this.internationalDocuments;
+    }
+  }
+
+  back() {
+    this.utilService.enabledView = Action.Create;
+    this.utilService.selectedItem = "List Students";
+    this.router.navigate(['/list']);
   }
 }

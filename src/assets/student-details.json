@@ -5,7 +5,15 @@
         "dob": "10/11/1994",
         "father": "O.P. Mishra",
         "mother": "Meena Mishra",
-        "last_class_score": "88%"
+        "last_class_score": "88%",
+        "documents" : {
+            "domicile" : true,
+            "birthCertificate" : true,
+            "marksheet" : true,
+            "policeClearance" : false,
+            "passport" : true,
+            "declaration" : true
+        }
     },
 
     {
@@ -14,6 +22,14 @@
         "dob": "14/11/1990",
         "father": "Brad Pitt",
         "mother": "Angelina Jolie",
-        "last_class_score": "90%"
+        "last_class_score": "90%",
+        "documents" : {
+            "domicile" : true,
+            "birthCertificate" : true,
+            "marksheet" : true,
+            "policeClearance" : true,
+            "passport" : true,
+            "declaration" : true
+        }
     }
 ]

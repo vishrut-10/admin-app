@@ -13,8 +13,8 @@
       <input name="name" placeholder="Name" ngModel /> <br/>
     
       <label>Category</label>
-      <select name = "category" ngModel>
-        <option value="">Category</option>
+      <select name = "category" ngModel (change) = "get($event.target)">
+        <option value="" disabled = "disabled">Category</option>
         <option value = "Domestic">Domestic</option>
         <option value = "International">International</option>
       </select><br/>
@@ -22,7 +22,7 @@
       <label>Documents</label>
       <div *ngFor = "let item of documents">
         {{item}}
-        <input type = "checkbox" [name] = "item" ngModel/>
+        <input type = "checkbox" [name] = "item.slice(0, -1)" ngModel/>
       </div><br/>
     
       <label>DOB</label>
@@ -47,19 +47,19 @@
   
     <label>Category</label>
     <select name = "category" [(ngModel)] = "stud_category">
-      <option value="">Category</option>
+      <option value="" disabled = "disabled">Category</option>
       <option value = "Domestic">Domestic</option>
       <option value = "International">International</option>
     </select><br/>
   
     <label>Documents</label>
-    <div *ngFor = "let item of documents">
+    <div *ngFor = "let item of documents; let i = index">
       {{item}}
-      <input type = "checkbox" [name] = "item" ngModel/>
+      <input type = "checkbox" [name] = "item.slice(0, -1)" [(ngModel)] = "documentValues[i]"/>
     </div><br/>
   
     <label>DOB</label>
-    <input type = "date" name = "dob" [(ngModel)] = "stud_dob" /><br/>
+    <input name = "dob" [(ngModel)] = "stud_dob" /><br/>
   
     <label>Father's Name</label>
     <input name="father_name" [(ngModel)] = "stud_father" /> <br/>
@@ -68,7 +68,7 @@
     <input name="mother_name" [(ngModel)] = "stud_mother" /> <br/>
   
     <label>Last Class Score</label>
-    <input name="score" [(ngModel)] = "stud_score" /> <br/>
+    <input name="last_class_score" [(ngModel)] = "stud_score" /> <br/>
     <button>Onboard</button>
   </form>
 </div>
@@ -86,13 +86,13 @@
     </select><br/>
   
     <label>Documents</label>
-    <div *ngFor = "let item of documents">
+    <div *ngFor = "let item of documents; let i = index">
       {{item}}
-      <input type = "checkbox" [name] = "item" ngModel disabled/>
+      <input type = "checkbox" [name] = "item" [(ngModel)] = "documentValues[i]" disabled/>
     </div><br/>
   
     <label>DOB</label>
-    <input type = "date" name = "dob" [(ngModel)] = "stud_dob" disabled /><br/>
+    <input name = "dob" [(ngModel)] = "stud_dob" disabled /><br/>
   
     <label>Father's Name</label>
     <input name="father_name" [(ngModel)] = "stud_father" disabled /> <br/>
@@ -105,3 +105,5 @@
     <button disabled >Onboard</button>
   </form>
 </div>
+
+<button (click) = "back()">Back</button>
