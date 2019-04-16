@@ -41,11 +41,11 @@ export class OnboardingFormComponent implements OnInit {
   createViewMessage = "On Boarding Form";
   displayViewMessage = "On Boarding Form (View)";
   editViewMessage = "On Boarding Form (Edit)";
-  documents : string[];
   domesticDocuments = ["Domicile*", "Birth_Certificate*", "Marksheets*", "Police_Clearance ", "Passport*", "Declaration*"];
   internationalDocuments = ["Domicile*", "Birth_Certificate*", "Marksheets*", "Police_Clearance*", "Passport*", "Declaration*"];
   student : Student;
   documentValues : boolean[] = [];
+  documents = this.domesticDocuments;
   
   stud_name : string;
   stud_dob : Date;
