@@ -10,63 +10,63 @@
 <button (click) = "back()">Back</button>
 </div><br>
 <div *ngIf = "createView" class="container">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-      <div clas="row">
-      <div class="header">
-        <label>Student Name</label>
-      </div>
-      <div class="box">
-        <input type="text" name="name" placeholder="Name" ngModel /> 
-      </div> <br>
-      <div class="header">
-        <label>Category</label>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" validate>
+    <div clas="row">
+    <div class="header">
+      <label>Student Name</label>
     </div>
-      <div class="box" id="category">
+    <div class="box">
+      <input type="text" name="name" placeholder="Name" ngModel />
+    </div> <br>
+    <div class="header">
+      <label>Category</label>
+    </div>
+    <div class="box" id="category">
       <select name = "category" ngModel (change) = "get($event.target)">
         <option value="" disabled = "disabled">Category</option>
         <option value = "Domestic">Domestic</option>
         <option value = "International">International</option>
       </select>
-      </div> <br>
-      <div class="header">
+    </div> <br>
+    <div class="header">
       <label>Documents</label>
     </div>
-      <div class="box">
-      <div *ngFor = "let item of documents">
-        {{item}}
-        <input type = "checkbox" [name] = "item.slice(0, -1)" ngModel/>
-      </div>
-      </div> <br>
-      <div class="header">
-      <label>DOB</label>
+    <div class="box">
+    <div *ngFor = "let item of documents">
+      {{item}}
+      <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" ngModel/>
     </div>
-      <div class="box">
-      <input type = "date" name = "dob" ngModel />
-      </div><br>
-      <div class="header">
-      <label>Father's Name</label>
-    </div>
-      <div class="box">
-      <input type="text" name="father_name" placeholder="Father's Name" ngModel /> 
-      </div><br>
-      <div class="header">
-      <label>Mother's Name</label>
-    </div>
-      <div class="box">
-      <input type="text" name="mother_name" placeholder="Mother's Name" ngModel /> 
-      </div><br>
-      <div class="header">
-      <label>Last Class Score</label>
-    </div>
-      <div class="box">
-      <input type="text" name="score" placeholder="%(marks)" ngModel /> 
-      
-      </div>
-    </div>
-    <div class = "onboard">
-        <input type="submit" value="Onboard" />
-    </div>
-    </form>
+    </div> <br>
+    <div class="header">
+    <label>DOB</label>
+  </div>
+    <div class="box">
+    <input type = "date" name = "dob" ngModel />
+    </div><br>
+    <div class="header">
+    <label>Father's Name</label>
+  </div>
+    <div class="box">
+    <input type="text" name="father_name" placeholder="Father's Name" ngModel /> 
+    </div><br>
+    <div class="header">
+    <label>Mother's Name</label>
+  </div>
+    <div class="box">
+    <input type="text" name="mother_name" placeholder="Mother's Name" ngModel /> 
+    </div><br>
+    <div class="header">
+    <label>Last Class Score</label>
+  </div>
+    <div class="box">
+    <input type="text" name="score" placeholder="%(marks)" ngModel /> 
+    
+  </div>
+  </div>
+  <div class = "onboard">
+      <input type="submit" value="Onboard" />
+  </div>
+  </form>
 </div>
 
 <div *ngIf = "editView">
@@ -82,7 +82,7 @@
     <label>Category</label>
     </div>
     <div class="box" id="category">
-    <select name = "category" [(ngModel)] = "stud_category">
+    <select name = "category" [(ngModel)] = "stud_category" (change) = "get($event.target)">
       <option value="" disabled = "disabled">Category</option>
       <option value = "Domestic">Domestic</option>
       <option value = "International">International</option>
@@ -94,7 +94,7 @@
     <div class="box">
     <div *ngFor = "let item of documents; let i = index">
       {{item}}
-      <input type = "checkbox" [name] = "item.slice(0, -1)" [(ngModel)] = "documentValues[i]"/>
+      <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" [(ngModel)] = "documentValues[i]"/>
     </div>
     </div><br>
     <div class="header">
@@ -153,7 +153,7 @@
       <div class="box">
       <div *ngFor = "let item of documents; let i = index">
         {{item}}
-        <input type = "checkbox" [name] = "item.slice(0, -1)" [(ngModel)] = "documentValues[i]" disabled  />
+        <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" [(ngModel)] = "documentValues[i]" disabled  />
       </div>
       </div><br>
       <div class="header">
