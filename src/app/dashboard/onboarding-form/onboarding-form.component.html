@@ -16,7 +16,8 @@
       <label>Student Name</label>
     </div>
     <div class="box">
-      <input type="text" name="name" placeholder="Name" ngModel />
+      <input type="text" name="name" placeholder="Name" ngModel/>
+      <p class = "errorMessage" *ngIf = "isInvalidNameField">*Name can't be null.</p>
     </div> <br>
     <div class="header">
       <label>Category</label>
@@ -27,14 +28,16 @@
         <option value = "Domestic">Domestic</option>
         <option value = "International">International</option>
       </select>
+      <p class = "message1">*Default category is Domestic.</p>
     </div> <br>
     <div class="header">
       <label>Documents</label>
     </div>
     <div class="box">
+        <p class="errorMessage" *ngIf = "isInvalidDocumentsField">All * are mandatory.</p>
     <div *ngFor = "let item of documents">
       {{item}}
-      <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" ngModel/>
+      <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" required ngModel/>
     </div>
     </div> <br>
     <div class="header">
@@ -70,13 +73,14 @@
 </div>
 
 <div *ngIf = "editView">
-  <form #f="ngForm" (ngSubmit)="onEdit(f)" class="container" novalidate>
+  <form #f="ngForm" (ngSubmit)="onEdit(f)" class="container" validate>
     <div class="row">
     <div class="header">
     <label>Student Name</label>
     </div>
     <div class="box" id="editbox">
-    <input  type="text" name="name" [(ngModel)] = "stud_name" /> <br/>
+      <input  type="text" name="name" [(ngModel)] = "stud_name" />
+      <p class = "errorMessage" *ngIf = "isInvalidNameField">*Name can't be null.</p>
     </div><br>
     <div class="header">
     <label>Category</label>
@@ -87,14 +91,16 @@
       <option value = "Domestic">Domestic</option>
       <option value = "International">International</option>
     </select>
+    <p class = "message1">*Default category is Domestic.</p>
     </div><br>
     <div class="header">
     <label>Documents</label>
     </div>
     <div class="box">
+        <p class="errorMessage" *ngIf = "isInvalidDocumentsField">All * are mandatory.</p>
     <div *ngFor = "let item of documents; let i = index">
       {{item}}
-      <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" [(ngModel)] = "documentValues[i]"/>
+      <input type = "checkbox" [name] = "item.slice(0, -1)" class = "checkbox-alignment" required [(ngModel)] = "documentValues[i]"/>
     </div>
     </div><br>
     <div class="header">

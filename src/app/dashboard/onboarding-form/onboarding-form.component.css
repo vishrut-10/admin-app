@@ -82,3 +82,13 @@ input[type=submit]:hover {
   float: right; 
   margin-right: 75%;
 }
+
+.errorMessage {
+  color: red;
+  display: inline-block;
+}
+
+.message1 {
+  color: blue;
+  display: inline-block;
+}

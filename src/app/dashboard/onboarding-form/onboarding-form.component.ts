@@ -46,6 +46,8 @@ export class OnboardingFormComponent implements OnInit {
   student : Student;
   documentValues : boolean[] = [];
   documents = this.domesticDocuments;
+  isInvalidNameField : boolean;
+  isInvalidDocumentsField : boolean;
   
   stud_name : string;
   stud_dob : Date;
@@ -54,56 +56,83 @@ export class OnboardingFormComponent implements OnInit {
   stud_score : string;
   stud_category : string;
 
-  onSubmit(f: NgForm) {
-    console.log(f.value);
+  validateDocuments(f : NgForm) {
     let formValue = f.value;
-    
-    this.student = {
-      name: formValue.name,
-      category : formValue.category,
-      dob : formValue.dob,
-      father : formValue.father_name,
-      mother : formValue.mother_name,
-      last_class_score : formValue.score,
-      documents : {
-        domicile : Boolean(formValue.Domicile),
-        marksheet : Boolean(formValue.Marksheets),
-        passport : Boolean(formValue.Passport),
-        policeClearance : Boolean(formValue.Police_Clearance),
-        declaration : Boolean(formValue.Declaration),
-        birthCertificate : Boolean(formValue.Birth_Certificate)
-      }
+    return Boolean(formValue.Domicile) && Boolean(formValue.Marksheets) && Boolean(formValue.Passport)
+          && !Boolean(formValue.Police_Clearance) && Boolean(formValue.Declaration) && Boolean(formValue.Birth_Certificate);
+  }
+
+  onSubmit(f: NgForm) {
+    let formValue = f.value;
+    this.isInvalidNameField = (formValue.name.length === 0) ? true : false;
+    let isValidForm = f.valid;
+    this.isInvalidDocumentsField = !isValidForm;
+
+    if ((formValue.category === "" || formValue.category === "Domestic") && this.validateDocuments(f) === true) {
+      this.isInvalidDocumentsField = false;
     }
 
-    console.log(this.student);
-    
-    this.utilService.addNewStudent(this.student);
-    this.utilService.selectedItem = "List Students";
-    this.router.navigate(['/list']);
+    isValidForm = !this.isInvalidNameField && !this.isInvalidDocumentsField;
+
+    if (isValidForm === true) {
+      this.student = {
+        name: formValue.name,
+        category : (formValue.category === "" || formValue.category === "Domestic") ? "Domestic" : formValue.category,
+        dob : formValue.dob,
+        father : formValue.father_name,
+        mother : formValue.mother_name,
+        last_class_score : formValue.score,
+        documents : {
+          domicile : Boolean(formValue.Domicile),
+          marksheet : Boolean(formValue.Marksheets),
+          passport : Boolean(formValue.Passport),
+          policeClearance : Boolean(formValue.Police_Clearance),
+          declaration : Boolean(formValue.Declaration),
+          birthCertificate : Boolean(formValue.Birth_Certificate)
+        }
+      }
+  
+      console.log(this.student);
+      
+      this.utilService.addNewStudent(this.student);
+      this.utilService.selectedItem = "List Students";
+      this.router.navigate(['/list']);
+    }
   }
 
   onEdit(f: NgForm) {
     let formValue = f.value;
-    
-    this.student = {
-      name: formValue.name,
-      category : formValue.category,
-      dob : formValue.dob,
-      father : formValue.father_name,
-      mother : formValue.mother_name,
-      last_class_score : formValue.last_class_score,
-      documents : {
-        domicile : Boolean(formValue.Domicile),
-        marksheet : Boolean(formValue.Marksheets),
-        passport : Boolean(formValue.Passport),
-        policeClearance : Boolean(formValue.Police_Clearance),
-        declaration : Boolean(formValue.Declaration),
-        birthCertificate : Boolean(formValue.Birth_Certificate)
-      }
+    this.isInvalidNameField = (formValue.name.length === 0) ? true : false;
+    let isValidForm = f.valid;
+    this.isInvalidDocumentsField = !isValidForm;
+
+    if ((formValue.category === "" || formValue.category === "Domestic") && this.validateDocuments(f) === true) {
+      this.isInvalidDocumentsField = false;
     }
-    this.utilService.editStudent(this.student, this.utilService.selectedStudent);
-    this.utilService.selectedItem = "List Students";
-    this.router.navigate(['/list']);
+
+    isValidForm = !this.isInvalidNameField && !this.isInvalidDocumentsField;
+
+    if (isValidForm === true) {
+      this.student = {
+        name: formValue.name,
+        category : formValue.category,
+        dob : formValue.dob,
+        father : formValue.father_name,
+        mother : formValue.mother_name,
+        last_class_score : formValue.last_class_score,
+        documents : {
+          domicile : Boolean(formValue.Domicile),
+          marksheet : Boolean(formValue.Marksheets),
+          passport : Boolean(formValue.Passport),
+          policeClearance : Boolean(formValue.Police_Clearance),
+          declaration : Boolean(formValue.Declaration),
+          birthCertificate : Boolean(formValue.Birth_Certificate)
+        }
+      }
+      this.utilService.editStudent(this.student, this.utilService.selectedStudent);
+      this.utilService.selectedItem = "List Students";
+      this.router.navigate(['/list']);
+    }
   }
 
   populateStudentView() {
