@@ -165,7 +165,7 @@ export class OnboardingFormComponent implements OnInit {
 
   back() {
     this.utilService.enabledView = Action.Create;
-    this.utilService.selectedItem = "List Students";
-    this.router.navigate(['/list']);
+    // this.utilService.selectedItem = "List Students";
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -19,6 +19,7 @@ export class StudentsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.utilService.selectedItem = "List Students";
   }
 
   allStudents : Student[];

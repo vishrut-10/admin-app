@@ -3,11 +3,11 @@ input {
 }
 
 .yellow {
-    background-color: yellow;
+    background-color: #ffff0029;
 }
 
 .blue {
-    background-color: aqua;
+    background-color:#00ffff38;
 }
 
 * {
@@ -79,4 +79,8 @@ body {
 .delete-button {
     background-color: red;
     margin-left: 5%;
+}
+
+.table-data {
+    margin-left: 30%;
 }

@@ -12,8 +12,25 @@
       <div class="column" *ngFor = "let student of filteredStudents; let i = index">
         <div class="card">
           <div [ngClass] = "{'blue': student.category === 'International', 'yellow': student.category === 'Domestic'}">
-            <label>Name: </label>{{student.name}}<br/>
-            <label>Category: </label>{{student.category}}<br/>
+            <table class = "table-data">
+              <tr>
+                <td>
+                    <label>Name: </label>
+                </td>
+                <td>
+                    {{student.name}}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                    <label>Category: </label>
+                </td>
+                <td>
+                    {{student.category}}
+                </td>
+              </tr>
+            </table>
             <button (click) = "editStudent(i)" class="button">Edit</button>
             <button (click) = "viewStudent(i)" class = "button view-button">View</button>
             <button (click) = "deleteStudent(i)" class = "button delete-button">Delete</button>

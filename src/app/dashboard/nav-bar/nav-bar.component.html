@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <ul id="grouplist" class="nav navbar-nav">
-      <li class="list-group-item" [ngClass]="{'active': selectedItem == item}" (click)="listClick(item)" *ngFor="let item of groups">
+      <li class="list-group-item list-item" [ngClass]="{'active': selectedItem == item}" (click)="listClick(item)" *ngFor="let item of groups">
          {{ item }}
       </li>
     </ul>

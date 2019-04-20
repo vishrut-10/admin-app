@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
 
   title = "Login School Admin";
   errorMessage = "*Invalid Username or Password.";
-  userName : string;
-  password : string;
+  userName : string = "admin";
+  password : string = "admin";
   isInvalidCredentials : boolean = false;
 
   login() {
